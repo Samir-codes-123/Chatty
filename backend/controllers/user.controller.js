@@ -4,7 +4,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 
 export const getUsersForSidebar = asyncHandler(async (req, res) => {
   const loggedInUser = req.user?._id;
-  const filteredUser = await User.find({ id: { $ne: loggedInUser } }).select(
+  const filteredUser = await User.find({ _id: { $ne: loggedInUser } }).select(
     "-password"
   ); // all but not the loggedIn user
   return res

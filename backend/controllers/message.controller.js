@@ -53,7 +53,8 @@ export const getMsg = asyncHandler(async (req, res) => {
     // array of message retriving
   }).populate("messages"); // full document retrieve
 
-  if (!conversation) throw new ApiError(404, "No messages found");
+  if (!conversation)
+    return res.status(200).json(new ApiResponse(200, [], "no messages"));
   return res
     .status(200)
     .json(
