@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://chatty-backend-1rc4.onrender.com",
+        target: "https://chatty-backend-epnc.onrender.com",
       },
     },
   },
