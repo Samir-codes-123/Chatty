@@ -4,6 +4,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { Conversation } from "../models/conversation.model.js";
+import { getReciverSocketId, io } from "../socket/socket.js";
 
 export const sendMsg = asyncHandler(async (req, res) => {
   const { id: recieverId } = req.params;
@@ -35,6 +36,10 @@ export const sendMsg = asyncHandler(async (req, res) => {
   conversation.messages.push(newMsg);
   await conversation.save();
   //TODO adding socket.io here later
+  const revieverSocketid = getReciverSocketId(recieverId); // gettng socket id of reciver
+  if (recieverId) {
+    io.to(revieverSocketid).emit("newMessage", newMsg); // sending to specific client
+  }
   return res
     .status(201)
     .json(new ApiResponse(201, newMsg, "Message sent successfully"));

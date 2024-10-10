@@ -35,6 +35,8 @@ export const signup = asyncHandler(async (req, res) => {
 export const login = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username });
+  console.log(user);
+
   if (!user) throw new ApiError(404, "No user Found");
   const isPassCorrect = await bcrypt.compare(password, user.password || "");
   if (!isPassCorrect) throw new ApiError(400, "Invalid Password");

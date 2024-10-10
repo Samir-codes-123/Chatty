@@ -1,11 +1,12 @@
 import React from "react";
 import Message from "./Message";
 import useGetMessages from "../../hooks/useGetMessages";
+import useListenMessages from "../../hooks/useListenMessages";
 
 const Messages = () => {
   const { messages, loading } = useGetMessages();
   // console.log("messages", messages);
-
+  useListenMessages();
   return (
     <div className="max-h-screen flex-1 px-4 overflow-auto">
       {loading && <div>add skeleton</div>}

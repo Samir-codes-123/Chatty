@@ -8,8 +8,7 @@ import connectDB from "./db/index.js";
 dotenv.config({
   path: "./.env",
 });
-
-const app = express();
+import { app, server } from "./socket/socket.js";
 const PORT = process.env.PORT || 5000;
 
 //parsing request
@@ -26,7 +25,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/messages", msgRoutes);
 app.use("/api/users", userRoutes);
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   connectDB();
   console.log(`server running on ${PORT}`);
 });

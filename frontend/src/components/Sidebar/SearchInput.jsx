@@ -14,7 +14,7 @@ const SearchInput = () => {
     if (!search) return;
     if (search.length < 3) toast.error("Search must be atleast 3 characters");
     const searchedConvo = conversations.data.find((c) =>
-      c.fullName.toLowerCase().includes(search.toLowerCase())
+      c.username.toLowerCase().includes(search.toLowerCase())
     );
     console.log(searchedConvo);
     if (searchedConvo) {
